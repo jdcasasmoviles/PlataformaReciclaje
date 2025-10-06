@@ -1,0 +1,15 @@
+@startuml
+salt
+{
+  {+
+    [ Lista de Incentivos ]
+    {#
+      | Nombre       | Costo en Puntos |
+      | Descuento 10% | 50              |
+      | Eco-bolsa     | 100             |
+    }
+    [ Seleccionar Incentivo | <combo> ]
+    [ Canjear ]
+  }
+}
+@enduml

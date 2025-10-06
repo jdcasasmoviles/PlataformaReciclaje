@@ -1,0 +1,55 @@
+flowchart TD
+
+    subgraph Login["📱 Pantalla de Login"]
+        L1["👤 Usuario\n[input field]"]
+        L2["🔒 Contraseña\n[input field]"]
+        L3["➡️ Iniciar Sesión [button]"]
+        L4["❓ ¿Olvidaste tu contraseña?\n[link]"]
+    end
+
+    subgraph Menu["🖥️ Menú Principal"]
+        M1["➕ Registrar Reciclaje [button]"]
+        M2["📜 Historial de Reciclaje [button]"]
+        M3["🎁 Canjear Incentivos [button]"]
+        M4["📊 Reportes [button]"]
+        M5["🚪 Cerrar Sesión [button]"]
+    end
+
+    subgraph Registrar["♻️ Registrar Reciclaje"]
+        R1["Material [dropdown]\nPlástico | Papel | Vidrio | Metal | Otro"]
+        R2["Cantidad [spinner/input number]"]
+        R3["Registrar ♻️ [button]"]
+    end
+
+    subgraph Historial["📜 Historial de Reciclaje"]
+        H1["📅 Fecha | Material | Cantidad | Puntos"]
+        H2["01/10/2025 | Plástico | 2 | 10"]
+        H3["02/10/2025 | Vidrio | 1 | 8"]
+        H4["⬇️ Exportar CSV"]:::expbtn
+        H5["⬇️ Exportar PDF"]:::expbtn
+    end
+
+    subgraph Incentivos["🎁 Canjear Incentivos"]
+        I1["Lista de Incentivos [table]\nNombre | Costo en Puntos"]
+        I2["Descuento 10% | 50"]
+        I3["Eco-bolsa | 100"]
+        I4["Seleccionar Incentivo [dropdown]"]
+        I5["Canjear ✅ [button]"]
+    end
+
+    subgraph Reportes["📊 Reportes Generales"]
+        U1["Usuario | Total Material | Total Puntos"]
+        U2["Ana | 5 kg | 120"]
+        U3["Luis | 3 kg | 80"]
+        U4["⬇️ Exportar a Excel"]:::excelbtn
+    end
+
+    L3 --> Menu
+    M1 --> Registrar
+    M2 --> Historial
+    M3 --> Incentivos
+    M4 --> Reportes
+    M5 --> Login
+
+classDef expbtn fill=#2196F3,stroke=#333,stroke-width=2px,color=white;
+classDef excelbtn fill=#4CAF50,stroke=#333,stroke-width=2px,color=white;

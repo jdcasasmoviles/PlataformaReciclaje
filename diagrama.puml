@@ -1,0 +1,60 @@
+@startuml
+title Plataforma de Reciclaje Inteligente - Flujo principal
+
+start
+
+:Inicio (Usuario entra a la plataforma);
+partition Registro {
+    if (¿Usuario registrado?) then (no)
+        :Registrar usuario (nombre, codigo, email);
+        :Crear perfil con puntos=0;
+    else (si)
+        :Login (email/codigo);
+    endif
+}
+
+:Mostrar menú principal;
+partition Menú {
+    :1) Registrar reciclaje;
+    :2) Consultar puntos;
+    :3) Canjear incentivo;
+    :4) Reportes/estadísticas;
+    :5) Salir;
+}
+
+if (Seleccion == 1) then (Registrar)
+    :Elegir tipo material (PLÁSTICO/PAPEL/LATA/VIDRIO/...);
+    :Ingresar cantidad (unidades o kg);
+    :Validar entrada;
+    :Calcular puntos según tabla de valores;
+    :Crear registro de reciclaje (timestamp, usuario, tipo, cantidad, pts);
+    :Sumar puntos al usuario;
+    :Mostrar confirmación y puntos ganados;
+    :Generar evento para leaderboard/estadísticas;
+endif
+
+if (Seleccion == 2) then (Consultar)
+    :Mostrar puntos acumulados y historial simple;
+endif
+
+if (Seleccion == 3) then (Canjear)
+    :Listar incentivos disponibles (costo en pts);
+    :Seleccionar incentivo;
+    if (usuario.puntos >= costo) then (si)
+        :Restar puntos;
+        :Marcar incentivo como canjeado / generar voucher;
+        :Mostrar confirmación;
+    else (no)
+        :Mostrar mensaje \"puntos insuficientes\";
+    endif
+endif
+
+if (Seleccion == 4) then (Reportes)
+    :Generar reporte: total reciclado, top usuarios, materiales más reciclados;
+endif
+
+if (Seleccion == 5) then (Salir)
+    stop
+endif
+
+@enduml

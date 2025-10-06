@@ -1,0 +1,14 @@
+@startuml
+salt
+{
+  {+
+    [ Reportes Generales ]
+    {#
+      | Usuario | Total Material | Total Puntos |
+      | Ana     | 5 kg           | 120          |
+      | Luis    | 3 kg           | 80           |
+    }
+    [ Exportar Excel ]
+  }
+}
+@enduml

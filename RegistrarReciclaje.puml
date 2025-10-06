@@ -1,0 +1,10 @@
+@startuml
+salt
+{
+  {+
+    [ Seleccionar Material | <combo: Plástico, Papel, Vidrio, Metal, Otro> ]
+    [ Cantidad             | <input number> ]
+    [ Registrar ]
+  }
+}
+@enduml
