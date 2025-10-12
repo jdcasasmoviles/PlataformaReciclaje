@@ -57,36 +57,36 @@ public class RecyclingRepositoryImpl implements RecyclingRepository {
     }
 
     @Override
-    public List<RecyclingRecord> findAll() { 
+    public List<RecyclingRecord> findTotalReciclado(String usuarioId) { 
         List<RecyclingRecord> lista = new ArrayList();
         lista.clear();
         Connection conexion = DBHelper.openDatabase();
         try {
-            String sqlConsulta = "SELECT "+ RegistroReciclaje.COL_ID+","
-                    + RegistroReciclaje.COL_USUARIO_ID+","
-                    + RegistroReciclaje.COL_MATERIAL+","
-                    + RegistroReciclaje.COL_CANTIDAD+","
-                    + RegistroReciclaje.COL_PUNTOS+","
-                    + RegistroReciclaje.COL_FECHA_REGISTRO
-                    + " FROM " + RegistroReciclaje.TABLE_NAME;
-            System.out.println("RecyclingRepositoryImpl findAll  "+sqlConsulta);
+             String sqlConsulta ="SELECT "+RegistroReciclaje.COL_MATERIAL+","
+                    + " SUM("+RegistroReciclaje.COL_CANTIDAD+"),"
+                    + "SUM("+RegistroReciclaje.COL_PUNTOS+") "
+                    + "FROM "+RegistroReciclaje.TABLE_NAME+"  "
+                    + " WHERE "+RegistroReciclaje.COL_USUARIO_ID+" = '"+usuarioId+"'  "
+                    + "  GROUP BY  "+ RegistroReciclaje.COL_MATERIAL+"  ";
+            System.out.println("RecyclingRepositoryImpl findTotalReciclado  "+sqlConsulta);
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlConsulta);
             try ( ResultSet resulset = preparedStatement.executeQuery()) {
+                Long contador=1L;
                 while (resulset.next()) {
                     RecyclingRecord recyclingRecord = new RecyclingRecord();
-                    recyclingRecord.setId(resulset.getLong(1));
-                    recyclingRecord.setUserId(resulset.getString(2));
-                    recyclingRecord.setMaterial(MaterialType.valueOf(resulset.getString(3).toUpperCase()));
-                    recyclingRecord.setQuantity(Double.parseDouble(resulset.getString(4)));
-                    recyclingRecord.setPoints(Integer.parseInt(resulset.getString(5)));
-                    recyclingRecord.setFechaRegistro(LocalDateTime.parse(resulset.getString(6)));
+                    recyclingRecord.setId(contador);
+                    recyclingRecord.setUserId(usuarioId);
+                    recyclingRecord.setMaterial(MaterialType.valueOf(resulset.getString(1).toUpperCase()));
+                    recyclingRecord.setQuantity(Double.parseDouble(resulset.getString(2)));
+                    recyclingRecord.setPoints(Integer.parseInt(resulset.getString(3)));
                     lista.add(recyclingRecord);
+                    contador++;
                 }
             }
             conexion.close();
         } catch (SQLException e) {
             try {
-                System.out.println("Exception RecyclingRepositoryImpl findAll " + e);
+                System.out.println("Exception RecyclingRepositoryImpl findTotalReciclado " + e);
                 conexion.close();
             } catch (SQLException ex) {
                 Logger.getLogger(RecyclingRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,6 +127,46 @@ public class RecyclingRepositoryImpl implements RecyclingRepository {
         } catch (SQLException e) {
             try {
                 System.out.println("Exception RecyclingRepositoryImpl findByUserId " + e);
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(RecyclingRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public List<RecyclingRecord> findAllTotalReciclado() {
+     List<RecyclingRecord> lista = new ArrayList();
+        lista.clear();
+        Connection conexion = DBHelper.openDatabase();
+        try {
+             String sqlConsulta ="SELECT "+RegistroReciclaje.COL_MATERIAL+","
+                    + " SUM("+RegistroReciclaje.COL_CANTIDAD+")   AS TOTAL_CANTIDAD  ,"
+                    + "SUM("+RegistroReciclaje.COL_PUNTOS+")  AS TOTAL_PUNTOS "
+                    + "FROM "+RegistroReciclaje.TABLE_NAME+"  "
+                    + " WHERE "+RegistroReciclaje.COL_USUARIO_ID+"  IS NOT NULL "
+                    + "  GROUP BY  "+ RegistroReciclaje.COL_MATERIAL+" "
+                     + "  ORDER BY  SUM("+RegistroReciclaje.COL_CANTIDAD+") DESC ";
+            System.out.println("RecyclingRepositoryImpl findAllTotalReciclado  "+sqlConsulta);
+            PreparedStatement preparedStatement = conexion.prepareStatement(sqlConsulta);
+            try ( ResultSet resulset = preparedStatement.executeQuery()) {
+                Long contador=1L;
+                while (resulset.next()) {
+                    RecyclingRecord recyclingRecord = new RecyclingRecord();
+                    recyclingRecord.setId(contador);
+                    recyclingRecord.setUserId("");
+                    recyclingRecord.setMaterial(MaterialType.valueOf(resulset.getString(1).toUpperCase()));
+                    recyclingRecord.setQuantity(Double.parseDouble(resulset.getString(2)));
+                    recyclingRecord.setPoints(Integer.parseInt(resulset.getString(3)));
+                    lista.add(recyclingRecord);
+                    contador++;
+                }
+            }
+            conexion.close();
+        } catch (SQLException e) {
+            try {
+                System.out.println("Exception RecyclingRepositoryImpl findAllTotalReciclado " + e);
                 conexion.close();
             } catch (SQLException ex) {
                 Logger.getLogger(RecyclingRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);

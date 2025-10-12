@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface RecyclingRepository {
     Long save(RecyclingRecord r);
-    List<RecyclingRecord> findAll();
+    List<RecyclingRecord> findTotalReciclado(String usuarioId);
     List<RecyclingRecord> findByUserId(String userId) ;
+    List<RecyclingRecord> findAllTotalReciclado();
 }

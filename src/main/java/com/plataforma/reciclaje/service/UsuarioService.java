@@ -9,7 +9,7 @@ public class UsuarioService {
      private final UserRepositoryImpl userRepo = new UserRepositoryImpl();
      
      public UsuarioService(){}
-     public List<User> listUsers() { return userRepo.findAll(); }
+     public List<User> findTopUsers() { return userRepo.findTopUsers(); }
      
     // Registro (registro si no existe)
     public User registerUsuario(String id, String name, String email) {

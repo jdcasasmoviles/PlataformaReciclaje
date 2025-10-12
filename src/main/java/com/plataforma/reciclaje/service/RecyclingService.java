@@ -30,10 +30,16 @@ public class RecyclingService {
         return recRepo.findByUserId(userId);
     }
 
-    public List<RecyclingRecord> allRecords() { return recRepo.findAll(); }
+    public List<RecyclingRecord> findTotalReciclado(String userId) { 
+        return recRepo.findTotalReciclado(userId); 
+    }
 
     public void save(RecyclingRecord recyclingRecord) {
       recRepo.save(recyclingRecord);
+    }
+
+    public List<RecyclingRecord> findAllTotalReciclado() {
+   return recRepo.findAllTotalReciclado(); 
     }
    
 }

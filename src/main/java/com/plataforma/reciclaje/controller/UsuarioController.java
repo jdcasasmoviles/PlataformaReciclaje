@@ -14,10 +14,13 @@ public class  UsuarioController{
     /*
     usuarioService.registerUsuario("COD00001", "Celeste Ramos", "celeste@autonoma.com.pe");
     usuarioService.registerUsuario("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
-    usuarioService.registerUsuario("COD00003", "Sergio Soto", "ser.soto@autonoma.com.pe");*/
+    usuarioService.registerUsuario("COD00003", "Sergio Soto", "ser.soto@autonoma.com.pe");
+    usuarioService.registerUsuario("COD00004", "Salomon Perez", "perez2345@autonoma.com.pe");
+    usuarioService.registerUsuario("COD00005", "Daniela Linares", "dan720220@autonoma.com.pe");
+    usuarioService.registerUsuario("COD00006", "Nilo Salas", "nillinares@autonoma.com.pe");*/
     }
     
-    public List<User> listUsers() { return usuarioService.listUsers(); }
+    public List<User> findTopUsers() { return usuarioService.findTopUsers(); }
     public User getCurrentUser() { return currentUser; }
         //Register
     public boolean registerUsuario(String id, String name, String email) {

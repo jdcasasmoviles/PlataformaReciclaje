@@ -12,12 +12,14 @@ public class PremioController {
     public PremioController(){
         /*
         rewardService.save(new Reward("Reclama una galleta en el kiosko", 50));
-        rewardService.save(new Reward("Descuento Cafetería 10%", 100));
-        rewardService.save(new Reward("Bono fotocopias 10 créditos", 200));
+        rewardService.save(new Reward("Bono fotocopias 10 créditos", 100));
+        rewardService.save(new Reward("Descuento Cafetería 10%", 200));
         rewardService.save(new Reward("Sorteo: Mochila ecológica", 300));
+        rewardService.save(new Reward("Kit Universitario", 400));
         rewardService.save(new Reward("Un llavero destapador", 500));
-        rewardService.save(new Reward("Un polo autonoma", 2000));
-        */
+        rewardService.save(new Reward("Descuento Cafetería 30%", 1000));
+        rewardService.save(new Reward("Un polo autonoma", 2000));*/
+        
     }
     
     public boolean redeem(User currentUser,String rewardId) {

@@ -119,7 +119,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() { 
+    public List<User> findTopUsers() { 
         List<User> lista = new ArrayList();
         lista.clear();
         Connection conexion = DBHelper.openDatabase();
@@ -128,7 +128,8 @@ public class UserRepositoryImpl implements UserRepository {
                  +Usuario.COL_NOMBRE+","
                   +Usuario.COL_EMAIL+","
                  +Usuario.COL_POINT
-                 +" FROM "+Usuario.TABLE_NAME+" ";
+                 +" FROM "+Usuario.TABLE_NAME+" "
+                 +"ORDER BY "+ Usuario.COL_POINT+" DESC";
             System.out.println("UserRepositoryImpl findAll "+sqlConsulta);
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlConsulta);
             try ( ResultSet resulset = preparedStatement.executeQuery()) {

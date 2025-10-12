@@ -11,9 +11,11 @@ public class RegistroReciclajeController {
     public RegistroReciclajeController(){  
         /*
         for(int i=0;i<6;i++){
-          generaRegistroreciclaje("COD00001");
-          generaRegistroreciclaje("COD00002");
-          generaRegistroreciclaje("COD00003");
+          generaRegistroreciclaje("COD00001","COD00001");
+          generaRegistroreciclaje("COD00002","COD00002");
+          generaRegistroreciclaje("COD00003","COD00003");
+          generaRegistroreciclaje("COD00004","COD00004");
+          generaRegistroreciclaje("COD00005","COD00005");
         }*/
     }
 
@@ -25,13 +27,21 @@ public class RegistroReciclajeController {
         return recyclingService.getUserHistory(usuario.getId());
     }
         
-    public List<RecyclingRecord> listAllRecords() { return recyclingService.allRecords(); }
+    public List<RecyclingRecord> findTotalReciclado(User usuario) { 
+        return recyclingService.findTotalReciclado(usuario.getId()); 
+    }
 
-    private void generaRegistroreciclaje(String idUsuario) {
+    private void generaRegistroreciclaje(String user,String password) {
+        UsuarioController usuarioController = new UsuarioController();
+        usuarioController.loginUsuario(user,password);
+                
          MaterialType material = MaterialType.randomMaterial();
         int cantidad=(int)(Math.random() * (17)) + 4;
-        int puntosPesoUnitario = material.pointsPerUnit();
-        int puntos = (int) Math.round(puntosPesoUnitario * cantidad);
-        recyclingService.save(new RecyclingRecord(idUsuario, material, cantidad, puntos));
+        recyclingService.registerRecycling(usuarioController.getCurrentUser(), material, cantidad);
+        //recyclingService.save(new RecyclingRecord(idUsuario, material, cantidad, puntos));
+    }
+
+    public Iterable<RecyclingRecord> findAllTotalReciclado() {
+  return recyclingService.findAllTotalReciclado();
     }
 }
