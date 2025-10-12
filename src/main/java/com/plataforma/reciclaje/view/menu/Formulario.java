@@ -7,9 +7,9 @@ import com.plataforma.reciclaje.model.MaterialType;
 import com.plataforma.reciclaje.model.RecyclingRecord;
 import com.plataforma.reciclaje.model.User;
 import com.plataforma.reciclaje.view.incentivos.Incentivos;
+import java.awt.Font;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -89,8 +89,8 @@ public class Formulario extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 204));
-        jLabel1.setText("SISTEMA DE RECILAJE INTELIGENTE");
+        jLabel1.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel1.setText("PLATAFORMA DE RECICLAJE INTELIGENTE");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("EMAIL");
@@ -186,7 +186,7 @@ public class Formulario extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,15 +287,15 @@ public class Formulario extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41))
+                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +305,7 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -327,13 +327,15 @@ public class Formulario extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVerResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40))
-            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +369,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -393,35 +395,25 @@ public class Formulario extends javax.swing.JFrame {
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
         jtaReportes.setEditable(false);
-            StringBuilder sb = new StringBuilder();
-            sb.append("========================= TOTAL RECICLADO POR EL USUARIO =========================\n\n");
-            int puntosOtorgados=0;
-            for (RecyclingRecord r : registroReciclajeController.findTotalReciclado(currentUser)) {
-                sb.append(String.format(r.getMaterial()+"\t:\t %.2f cantidad\t\t %d puntos\n", r.getQuantity(),r.getPoints()));
-                puntosOtorgados=puntosOtorgados+r.getPoints();
-            }
-            sb.append("\nTotal puntos otorgados:\t"+puntosOtorgados+"\n\n");
-            sb.append("\n================================= TOP USUARIOS =================================\n\n");
-            for (User u : usuarioController.findTopUsers()) {
-                sb.append(String.format(u.getName()+"\t\t:\t %s \tpuntos\n", u.getPoints()));
-            }
-            sb.append("\n======================= MATERIALES MÁS RECICLADOS EN GENERAL =========================\n\n");
-            for (RecyclingRecord r : registroReciclajeController.findAllTotalReciclado()) {
-                sb.append(String.format(r.getMaterial()+"\t:\t %.2f cantidad\n", r.getQuantity()));
-            }
- 
-            
-             
-        /*
-        reporte.append("\nMATERIALES MÁS RECICLADOS EN GENERAL:\n");
-        reporte.append(String.format("1. Plástico: %.2f\n", totalPlastico));
-        reporte.append(String.format("2. Papel: %.2f\n", totalPapel));
-        reporte.append(String.format("3. Latas: %.2f\n", totalLata));
-        reporte.append(String.format("4. Vidrio: %.2f\n", totalVidrio));*/
-        
-        
-        
-            jtaReportes.setText(sb.toString());
+        jtaReportes.setFont(new Font("Monospaced", Font.PLAIN, 12));    
+        StringBuilder sb = new StringBuilder();
+        sb.append("========================= TOTAL RECICLADO POR EL USUARIO =========================\n\n");
+        int puntosOtorgados = 0;
+        for (RecyclingRecord r : registroReciclajeController.findTotalReciclado(currentUser)) {
+        sb.append(String.format("%-20s : %8.2f cantidad %10d puntos\n", 
+                           r.getMaterial(), r.getQuantity(), r.getPoints()));
+        puntosOtorgados += r.getPoints();
+        }
+        sb.append("\nTotal puntos otorgados: " + puntosOtorgados + "\n\n");
+        sb.append("================================= TOP USUARIOS =================================\n\n");
+        for (User u : usuarioController.findTopUsers()) {
+            sb.append(String.format("%-20s : %6d puntos\n", u.getName(), u.getPoints()));
+        }
+        sb.append("\n======================= MATERIALES MÁS RECICLADOS EN GENERAL =========================\n\n");
+        for (RecyclingRecord r : registroReciclajeController.findAllTotalReciclado()) {
+            sb.append(String.format("%-20s : %8.2f cantidad\n", r.getMaterial(), r.getQuantity()));
+        }      
+        jtaReportes.setText(sb.toString());
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnVerResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerResultadosActionPerformed
