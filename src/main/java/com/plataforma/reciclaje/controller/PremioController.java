@@ -10,9 +10,9 @@ public class PremioController {
     RewardService rewardService = new RewardService();
     
     public PremioController(){
-        rewardService.save(new Reward("R1", "Descuento Cafetería 10%", 100));
-        rewardService.save(new Reward("R2", "Bono fotocopias 500 créditos", 200));
-        rewardService.save(new Reward("R3", "Sorteo: Mochila ecológica", 300));
+        rewardService.save(new Reward("Descuento Cafetería 10%", 100));
+        rewardService.save(new Reward("Bono fotocopias 500 créditos", 200));
+        rewardService.save(new Reward("Sorteo: Mochila ecológica", 300));
     }
     
     public boolean redeem(User currentUser,String rewardId) {

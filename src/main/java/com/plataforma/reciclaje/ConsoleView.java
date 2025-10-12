@@ -1,4 +1,4 @@
-package com.plataforma.reciclaje.view;
+package com.plataforma.reciclaje;
 import com.plataforma.reciclaje.controller.PremioController;
 import com.plataforma.reciclaje.controller.RegistroReciclajeController;
 import com.plataforma.reciclaje.controller.UsuarioController;
@@ -35,7 +35,7 @@ public class ConsoleView {
         String email = sc.nextLine().trim();
         usuarioController.loginOrRegister(id, name, email);
         */
-        usuarioController.loginOrRegister("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
+        usuarioController.registerUsuario("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
         currentUser = usuarioController.getCurrentUser();
         System.out.println("Bienvenido, " + usuarioController.getCurrentUser().getName());
     }

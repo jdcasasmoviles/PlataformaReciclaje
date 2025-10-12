@@ -1,7 +1,5 @@
 package com.plataforma.reciclaje;
-
-import com.plataforma.reciclaje.repository.config.DBHelper;
-import com.plataforma.reciclaje.view.SwingView;
+import com.plataforma.reciclaje.view.menu.SwingView;
 import javax.swing.*;
 public class Principal {
     public static void main(String[] args) {
@@ -11,7 +9,6 @@ public class Principal {
         } catch (Exception ignored) {}
 
         SwingUtilities.invokeLater(() -> {
-            DBHelper.createDatabase();
             var view = new SwingView();
             view.setVisible(true);
         });

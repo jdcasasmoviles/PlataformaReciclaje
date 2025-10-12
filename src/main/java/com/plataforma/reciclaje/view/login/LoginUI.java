@@ -1,11 +1,12 @@
 package com.plataforma.reciclaje.view.login;
-import com.plataforma.reciclaje.view.Registrar;
-import com.plataforma.reciclaje.view.MenuPlataforma;
+import com.plataforma.reciclaje.controller.UsuarioController;
+import com.plataforma.reciclaje.view.menu.Formulario;
+import com.plataforma.reciclaje.view.registrar.Registrar;
 import javax.swing.*;
 import java.awt.*;
 
 public class LoginUI extends javax.swing.JFrame {
-
+    UsuarioController usuarioController = new UsuarioController();
     public LoginUI() {
         initComponents();
         setLocationRelativeTo(null);
@@ -126,16 +127,21 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         String user = txtUser.getText();
-        String pass = new String(txtPass.getPassword());
-          setVisible(false);
-          MenuPlataforma formulario=new MenuPlataforma();
-                    formulario.setVisible(true);
+        String password = new String(txtPass.getPassword());
         /*
-        if ("admin".equals(user) && "1234".equals(pass)) {
-            JOptionPane.showMessageDialog(this, "✅ Bienvenido " + user);
+        if (user.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+                return;
+        }*/
+        user="COD00002";
+        password="COD00002";
+        if (usuarioController.loginUsuario(user,password)) {
+          setVisible(false);
+          Formulario formulario=new Formulario(usuarioController.getCurrentUser());
+         formulario.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "❌ Usuario o contraseña incorrectos");
-        }*/
+        }
     }
 
     private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +150,22 @@ public class LoginUI extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
+                try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         java.awt.EventQueue.invokeLater(() -> new LoginUI().setVisible(true));
     }
 

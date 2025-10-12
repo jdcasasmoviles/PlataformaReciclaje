@@ -8,4 +8,5 @@ public interface UserRepository {
     Optional<User> findById(String id);
     List<User> findAll();
     void update(User usuario);
+    User findUsuario(String usuario,String password);
 }

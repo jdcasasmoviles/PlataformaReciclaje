@@ -31,7 +31,7 @@ public class RewardRepositoryImpl implements RewardRepository {
             try ( ResultSet resulset = preparedStatement.executeQuery()) {
                 while (resulset.next()) {
                     Reward  reward = new Reward();
-                    reward.setId(resulset.getString(1));
+                    reward.setId(resulset.getLong(1));
                     reward.setName(resulset.getString(2));
                     reward.setCostPoints(Integer.parseInt(resulset.getString(3)));
                     lista.add(reward);
@@ -56,14 +56,12 @@ public class RewardRepositoryImpl implements RewardRepository {
         try {
             PreparedStatement preparedStatement;
             String sql = "insert into "+Premio.TABLE_NAME+" ("
-                    + Premio.COL_ID + ","
                     + Premio.COL_NAME + ","
-                    + Premio.COL_COST_POINT+ ") values(?,?,?)";                       
+                    + Premio.COL_COST_POINT+ ") values(?,?)";                       
             System.out.println("RewardRepositoryImpl save sql " + sql);
             preparedStatement = conexion.prepareStatement(sql);
-            preparedStatement.setString(1, reward.getId());
-            preparedStatement.setString(2, reward.getName());
-             preparedStatement.setString(3, String.valueOf(reward.getCostPoints()));
+            preparedStatement.setString(1, reward.getName());
+             preparedStatement.setString(2, String.valueOf(reward.getCostPoints()));
             preparedStatement.executeUpdate();
         }catch (Exception ex) {
            System.out.println("Exception RewardRepositoryImpl save " + ex);
@@ -90,7 +88,7 @@ public class RewardRepositoryImpl implements RewardRepository {
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlConsulta);
             try ( ResultSet resulset = preparedStatement.executeQuery()) {
                 while (resulset.next()) {
-                    premio.setId(resulset.getString(1));
+                    premio.setId(resulset.getLong(1));
                     premio.setName(resulset.getString(2));
                     premio.setCostPoints(Integer.parseInt(resulset.getString(3)));
                      return premio;

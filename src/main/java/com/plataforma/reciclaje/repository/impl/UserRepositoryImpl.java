@@ -12,6 +12,44 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserRepositoryImpl implements UserRepository {
+    
+        @Override
+    public User findUsuario(String usuario, String password) { 
+    User usuarioLogin = null;
+    Connection  conexion=DBHelper.openDatabase(); 
+    try{
+         String sqlConsulta="SELECT "+Usuario.COL_ID_USUARIO+","
+                 +Usuario.COL_NOMBRE+","
+                  +Usuario.COL_EMAIL+","
+                 +Usuario.COL_POINT
+                 +" FROM "+Usuario.TABLE_NAME+" WHERE "+
+                 Usuario.COL_ID_USUARIO+" = '"+usuario+"' AND "+
+                  Usuario.COL_PASSWORD+" = '"+password+"'  ";
+         System.out.println("UserRepositoryImpl findUsuario "+sqlConsulta);
+         PreparedStatement  preparedStatement=conexion.prepareStatement(sqlConsulta);
+        try (ResultSet resulset = preparedStatement.executeQuery()) {
+            while(resulset.next()){
+                System.out.println("UserRepositoryImpl findUsuario resulset "+resulset);
+                usuarioLogin = new User(
+                        resulset.getString(1),
+                        resulset.getString(2),
+                        resulset.getString(3),
+                       Integer.parseInt( resulset.getString(4))
+                ); 
+                 return usuarioLogin;
+            }
+        }
+        conexion.close();
+     }catch (SQLException e){
+        try {
+            System.out.println( "Exception UserRepositoryImpl findUsuario  "+ e);
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+    return usuarioLogin;
+    }
 
     @Override
     public Optional<User> findById(String id) { 

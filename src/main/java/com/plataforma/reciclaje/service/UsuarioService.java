@@ -12,7 +12,7 @@ public class UsuarioService {
      public UsuarioService(){}
      public List<User> listUsers() { return userRepo.findAll(); }
      
-    // Registro / login básico (registro si no existe)
+    // Registro (registro si no existe)
     public User registerOrGetUser(String id, String name, String email) {
         Optional<User> op = userRepo.findById(id);
         if (op.isPresent()) {
@@ -23,6 +23,12 @@ public class UsuarioService {
         User u = new User(id, name, email,random.nextInt(906) + 325);
         userRepo.save(u);
         return u;
+    }
+    
+        // Registro / login básico (registro si no existe)
+    public User loginUsuario(String usuario, String password) {
+        User usuarioLogin = userRepo.findUsuario(usuario, password);
+        return usuarioLogin;
     }
     
 }

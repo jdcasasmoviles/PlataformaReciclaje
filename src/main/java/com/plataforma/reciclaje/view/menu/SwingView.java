@@ -1,4 +1,4 @@
-package com.plataforma.reciclaje.view;
+package com.plataforma.reciclaje.view.menu;
 
 import com.plataforma.reciclaje.controller.PremioController;
 import com.plataforma.reciclaje.controller.RegistroReciclajeController;
@@ -62,10 +62,14 @@ public class SwingView extends JFrame {
                 JOptionPane.showMessageDialog(this, "Completa todos los campos.");
                 return;
             }*/
-            usuarioController.loginOrRegister("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
-            currentUser = usuarioController.getCurrentUser();
-            lblWelcome.setText("Bienvenido: " + currentUser.getName());
-            lblPoints.setText("Puntos: " + currentUser.getPoints());
+            usuarioController.registerUsuario("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
+            Boolean acceso=usuarioController.loginUsuario("COD00002","COD00002");
+            if(acceso){   
+              System.out.println("Acceso permitido");
+             currentUser = usuarioController.getCurrentUser();
+             lblWelcome.setText("Bienvenido: " + currentUser.getName());
+             lblPoints.setText("Puntos: " + currentUser.getPoints());
+            }    
         });
 
         panel.add(new JLabel("Código:"));
