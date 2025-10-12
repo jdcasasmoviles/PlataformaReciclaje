@@ -2,10 +2,14 @@ package com.plataforma.reciclaje.view.menu;
 
 import com.plataforma.reciclaje.controller.PremioController;
 import com.plataforma.reciclaje.controller.RegistroReciclajeController;
+import com.plataforma.reciclaje.model.MaterialType;
 import com.plataforma.reciclaje.model.RecyclingRecord;
 import com.plataforma.reciclaje.model.User;
 import com.plataforma.reciclaje.view.incentivos.Incentivos;
+import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Formulario extends javax.swing.JFrame {
@@ -16,25 +20,26 @@ public class Formulario extends javax.swing.JFrame {
     public Formulario(User currentUser) {
         this.currentUser=currentUser;
         initComponents();
+        cmbMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(MaterialType.values()));
         txtUsuario.setText(currentUser.getName());
         txtUsuario.setEditable(false);
         txtEmail.setText(currentUser.getEmail());
         txtEmail.setEditable(false);
         txtPuntos.setText(String.valueOf(currentUser.getPoints()));
         txtPuntos.setEditable(false);
-        
         llenarTablaHistorialreciclaje(registroReciclajeController.getHistory(currentUser), (DefaultTableModel) tablaHistorial.getModel());
-        //procesaDataUsuario();
     }
     
        //--------------------------metodos-------------------------------
         private void llenarTablaHistorialreciclaje(List<RecyclingRecord> history, DefaultTableModel model) {
-        // Llenar el modelo con los datos del historial
+         model.setRowCount(0);
+        DateTimeFormatter fechaFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DecimalFormat df = new DecimalFormat("#.##"); // quita los ceros innecesarios
         for (RecyclingRecord r : history) {
             model.addRow(new Object[]{
-                r.getFechaRegistro(),
+                (r.getFechaRegistro()).format(fechaFormato),
                 r.getMaterial(),
-                r.getQuantity(),
+                df.format(r.getQuantity()) ,
                 r.getPoints()
         });
         }
@@ -57,7 +62,6 @@ public class Formulario extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtPuntaje = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -65,6 +69,7 @@ public class Formulario extends javax.swing.JFrame {
         btnRegistrarReciclaje = new javax.swing.JButton();
         btnActividad1 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        cmbMaterial = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -103,19 +108,10 @@ public class Formulario extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("CANTIDAD");
 
-        txtPuntaje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtPuntaje.setEnabled(false);
-        txtPuntaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPuntajeActionPerformed(evt);
-            }
-        });
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("MATERIAL");
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtCantidad.setEnabled(false);
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadActionPerformed(evt);
@@ -123,7 +119,7 @@ public class Formulario extends javax.swing.JFrame {
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setText("PUNTOS");
+        jLabel14.setText("PUNTOS ACUMULADOS");
 
         txtPuntos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtPuntos.setEnabled(false);
@@ -160,6 +156,12 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        cmbMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMaterialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -192,14 +194,14 @@ public class Formulario extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPuntaje, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(26, 26, 26)
+                                .addComponent(cmbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(btnRegistrarReciclaje)
                         .addGap(18, 18, 18)
                         .addComponent(btnActividad1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -226,10 +228,10 @@ public class Formulario extends javax.swing.JFrame {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPuntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel13)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -307,7 +309,7 @@ public class Formulario extends javax.swing.JFrame {
         btnVerResultados.setBackground(new java.awt.Color(0, 102, 153));
         btnVerResultados.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnVerResultados.setForeground(new java.awt.Color(255, 255, 255));
-        btnVerResultados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/resul.png"))); // NOI18N
+        btnVerResultados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar.png"))); // NOI18N
         btnVerResultados.setText("ACTUALIZAR");
         btnVerResultados.setBorderPainted(false);
         btnVerResultados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -333,13 +335,10 @@ public class Formulario extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnVerResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5)
+                    .addComponent(btnVerResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -372,13 +371,21 @@ public class Formulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarReciclajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarReciclajeActionPerformed
-        // TODO add your handling code here:
-        // Paso 5: Presentar actividad
+            if (currentUser == null) {
+                JOptionPane.showMessageDialog(this, "Inicie sesión primero.");
+                return;
+            }
+            try {
+                double qty = Double.parseDouble(txtCantidad.getText());
+                
+                RecyclingRecord rec = registroReciclajeController.registerRecycling(currentUser,(MaterialType) cmbMaterial.getSelectedItem(), qty);
+                JOptionPane.showMessageDialog(this, "Registro guardado: " + rec);
+                txtPuntos.setText(String.valueOf(currentUser.getPoints()));
+                llenarTablaHistorialreciclaje(registroReciclajeController.getHistory(currentUser), (DefaultTableModel) tablaHistorial.getModel());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+            }
     }//GEN-LAST:event_btnRegistrarReciclajeActionPerformed
-
-    private void txtPuntajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuntajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPuntajeActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
@@ -397,8 +404,7 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnVerResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerResultadosActionPerformed
-               // Paso 6: Evaluar resultados
-         
+     llenarTablaHistorialreciclaje(registroReciclajeController.getHistory(currentUser), (DefaultTableModel) tablaHistorial.getModel());      
     }//GEN-LAST:event_btnVerResultadosActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
@@ -407,7 +413,7 @@ public class Formulario extends javax.swing.JFrame {
 
     private void btnActividad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActividad1ActionPerformed
         // TODO add your handling code here:
-        Incentivos incentivos = new Incentivos(premioController);
+        Incentivos incentivos = new Incentivos(premioController,currentUser,txtPuntos);
         incentivos.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_btnActividad1ActionPerformed
 
@@ -416,6 +422,11 @@ public class Formulario extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void cmbMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMaterialActionPerformed
+        // TODO add your handling code here:
+        int indice=cmbMaterial.getSelectedIndex();
+    }//GEN-LAST:event_cmbMaterialActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -423,6 +434,7 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarReciclaje;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnVerResultados;
+    private javax.swing.JComboBox cmbMaterial;
     private javax.swing.JButton jButton11;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -442,7 +454,6 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JTable tablaHistorial;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPuntaje;
     private javax.swing.JTextField txtPuntos;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

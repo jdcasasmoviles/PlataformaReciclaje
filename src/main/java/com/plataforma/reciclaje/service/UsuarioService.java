@@ -4,7 +4,6 @@ import com.plataforma.reciclaje.model.User;
 import com.plataforma.reciclaje.repository.impl.UserRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class UsuarioService {
      private final UserRepositoryImpl userRepo = new UserRepositoryImpl();
@@ -13,14 +12,13 @@ public class UsuarioService {
      public List<User> listUsers() { return userRepo.findAll(); }
      
     // Registro (registro si no existe)
-    public User registerOrGetUser(String id, String name, String email) {
+    public User registerUsuario(String id, String name, String email) {
         Optional<User> op = userRepo.findById(id);
         if (op.isPresent()) {
             System.out.println("Ya registrado usuario "+id);
-            return op.get();
+            return null;
         }
-        Random random = new Random();
-        User u = new User(id, name, email,random.nextInt(906) + 325);
+        User u = new User(id, name, email,0);
         userRepo.save(u);
         return u;
     }

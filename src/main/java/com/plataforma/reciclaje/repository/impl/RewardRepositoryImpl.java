@@ -83,7 +83,7 @@ public class RewardRepositoryImpl implements RewardRepository {
                     + Premio.COL_NAME+","
                     + Premio.COL_COST_POINT+""
                     + " FROM " + Premio.TABLE_NAME+""
-                    + " WHERE "+Premio.COL_ID+" = '"+rewardId+"'";
+                    + " WHERE "+Premio.COL_ID+" = "+rewardId+" ";
              System.out.println("RewardRepositoryImpl   findById  "+sqlConsulta);
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlConsulta);
             try ( ResultSet resulset = preparedStatement.executeQuery()) {

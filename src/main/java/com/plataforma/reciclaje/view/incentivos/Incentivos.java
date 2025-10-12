@@ -1,30 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.plataforma.reciclaje.view.incentivos;
 
 import com.plataforma.reciclaje.controller.PremioController;
 import com.plataforma.reciclaje.model.Reward;
+import com.plataforma.reciclaje.model.User;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author UsuarioPC
- */
 public class Incentivos extends javax.swing.JFrame {
+    User currentUser;
+    PremioController premioController;
+    JTextField txtPuntos;
 
-    /** Creates new form Incentivos */
-    public Incentivos(PremioController premioController) {
+    public Incentivos(PremioController premioController, User currentUser, JTextField txtPuntos) {
+        this.currentUser=currentUser;
+        this.premioController=premioController;
+        this.txtPuntos=txtPuntos;
         initComponents();
+        txtPuntosAcumulados.setText(String.valueOf(currentUser.getPoints()));
        llenarTablaIncentivos(premioController.listRewards(), (DefaultTableModel) tablaIncentivos.getModel());
-    
     }
-    
-    
+     
      private void llenarTablaIncentivos(List<Reward> rewards, DefaultTableModel model) {
          model.setRowCount(0);
         for (Reward r : rewards) {
@@ -49,6 +46,8 @@ public class Incentivos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIncentivos = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        txtPuntosAcumulados = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
         btnCanjear = new javax.swing.JButton();
 
@@ -70,6 +69,12 @@ public class Incentivos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaIncentivos);
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("PUNTOS ACUMULADOS");
+
+        txtPuntosAcumulados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtPuntosAcumulados.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -77,16 +82,28 @@ public class Incentivos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPuntosAcumulados, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(32, 32, 32)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(txtPuntosAcumulados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -107,7 +124,7 @@ public class Incentivos extends javax.swing.JFrame {
         btnCanjear.setBackground(new java.awt.Color(0, 102, 153));
         btnCanjear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCanjear.setForeground(new java.awt.Color(255, 255, 255));
-        btnCanjear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/resul.png"))); // NOI18N
+        btnCanjear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/canje.png"))); // NOI18N
         btnCanjear.setText("CANJEAR");
         btnCanjear.setBorderPainted(false);
         btnCanjear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -152,22 +169,42 @@ public class Incentivos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCanjearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanjearActionPerformed
-        // Paso 6: Evaluar resultados
+            if (currentUser == null) {
+                JOptionPane.showMessageDialog(this, "Inicie sesión primero.");
+                return;
+            }
+            int row = tablaIncentivos.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione un incentivo.");
+                return;
+            }
+            DefaultTableModel modelReward=((DefaultTableModel) tablaIncentivos.getModel());
+            String rewardId = String.valueOf(modelReward.getValueAt(row, 0));
+            boolean ok = premioController.redeem(currentUser,rewardId);
+            if (ok) {
+                JOptionPane.showMessageDialog(this, "Canje exitoso.");
+                txtPuntosAcumulados.setText(String.valueOf(currentUser.getPoints()));
+                txtPuntos.setText(String.valueOf(currentUser.getPoints()));
+            } else {
+                JOptionPane.showMessageDialog(this, "No tiene puntos suficientes.");
+            }
 
     }//GEN-LAST:event_btnCanjearActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanjear;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaIncentivos;
+    private javax.swing.JTextField txtPuntosAcumulados;
     // End of variables declaration//GEN-END:variables
 
 }

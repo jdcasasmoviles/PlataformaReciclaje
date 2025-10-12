@@ -9,15 +9,16 @@ public class RegistroReciclajeController {
     RecyclingService recyclingService = new RecyclingService();
     
     public RegistroReciclajeController(){  
-        generaRegistroreciclaje("COD00002");
-         generaRegistroreciclaje("COD00002");
+        /*
+        for(int i=0;i<6;i++){
+          generaRegistroreciclaje("COD00001");
           generaRegistroreciclaje("COD00002");
-           generaRegistroreciclaje("COD00002");
-            generaRegistroreciclaje("COD00002");
+          generaRegistroreciclaje("COD00003");
+        }*/
     }
 
     public RecyclingRecord registerRecycling(User usuario,MaterialType material, double qty) {
-        return recyclingService.registerRecycling(usuario.getId(), material, qty);
+        return recyclingService.registerRecycling(usuario, material, qty);
     }
 
     public List<RecyclingRecord> getHistory(User usuario) {

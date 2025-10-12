@@ -2,11 +2,10 @@ package com.plataforma.reciclaje.model;
 import java.util.Objects;
 
 public class User {
-    private String id; // e.g., codigo universitario
+    private String id; //codigo universitario
     private String name;
     private String email;
     private int points;
-    //private final List<RecyclingRecord> history = new ArrayList<>();
     public User(){
     }
 

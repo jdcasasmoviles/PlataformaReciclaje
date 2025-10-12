@@ -11,18 +11,20 @@ public class  UsuarioController{
     
     public UsuarioController(){
     DBHelper.createDatabase();
-    usuarioService.registerOrGetUser("COD00001", "Celeste Ramos", "celeste@autonoma.com.pe");
-    usuarioService.registerOrGetUser("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
-    usuarioService.registerOrGetUser("COD00003", "Sergio Soto", "ser.soto@autonoma.com.pe");
+    /*
+    usuarioService.registerUsuario("COD00001", "Celeste Ramos", "celeste@autonoma.com.pe");
+    usuarioService.registerUsuario("COD00002", "Kimberly Quispe", "kquispe@autonoma.com.pe");
+    usuarioService.registerUsuario("COD00003", "Sergio Soto", "ser.soto@autonoma.com.pe");*/
     }
     
     public List<User> listUsers() { return usuarioService.listUsers(); }
     public User getCurrentUser() { return currentUser; }
         //Register
     public boolean registerUsuario(String id, String name, String email) {
-        currentUser = usuarioService.registerOrGetUser(id, name, email);
+        currentUser = usuarioService.registerUsuario(id, name, email);
         return currentUser != null;
     }
+    
     //AUth
     public boolean loginUsuario(String usuario, String password) {
         currentUser = usuarioService.loginUsuario(usuario, password);

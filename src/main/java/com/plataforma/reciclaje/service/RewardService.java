@@ -12,13 +12,12 @@ public class RewardService {
     private final RewardRepositoryImpl rewardRepo = new RewardRepositoryImpl();
     public RewardService(){}
    
-    public boolean redeemReward(String userId, String rewardId) {
-        var uOpt = userRepo.findById(userId);
+    public boolean redeemReward(User usuario, String rewardId) {
+        var uOpt = userRepo.findById(usuario.getId());
         var rew = rewardRepo.findById(rewardId);
         if (uOpt.isEmpty() || rew == null) return false;
-        User u = uOpt.get();
-        if (u.consumePoints(rew.getCostPoints())) {
-            userRepo.update(u);
+        if (usuario.consumePoints(rew.getCostPoints())) {
+            userRepo.update(usuario);
             return true;
         }
         return false;

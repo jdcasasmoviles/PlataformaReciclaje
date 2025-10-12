@@ -10,7 +10,6 @@ public class LoginUI extends javax.swing.JFrame {
     public LoginUI() {
         initComponents();
         setLocationRelativeTo(null);
-
         // Fade In al iniciar
         new Thread(() -> {
             try {
@@ -47,7 +46,6 @@ public class LoginUI extends javax.swing.JFrame {
         mainPanel.setLayout(new GridBagLayout());
 
         cardPanel.setBackground(new Color(173, 216, 230, 128));
-        //cardPanel.setOpaque(false);
         cardPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
                 BorderFactory.createEmptyBorder(20, 20, 20, 20)
@@ -128,15 +126,12 @@ public class LoginUI extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         String user = txtUser.getText();
         String password = new String(txtPass.getPassword());
-        /*
         if (user.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Completa todos los campos.");
                 return;
-        }*/
-        user="COD00002";
-        password="COD00002";
+        }
         if (usuarioController.loginUsuario(user,password)) {
-          setVisible(false);
+          dispose();
           Formulario formulario=new Formulario(usuarioController.getCurrentUser());
          formulario.setVisible(true);
         } else {
@@ -145,12 +140,12 @@ public class LoginUI extends javax.swing.JFrame {
     }
 
     private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {
-          Registrar registrar=new Registrar();
+       Registrar registrar=new Registrar(usuarioController);
         registrar.setVisible(true);
     }
 
     public static void main(String args[]) {
-                try {
+       try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.plataforma.reciclaje.view.registrar;
+import com.plataforma.reciclaje.controller.UsuarioController;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author UsuarioPC
- */
 public class Registrar extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Registrar
-     */
-    public Registrar() {
+    UsuarioController usuarioController;
+    public Registrar(UsuarioController usuarioController) {
+        this.usuarioController=usuarioController;
         initComponents();
     }
 
@@ -30,12 +21,12 @@ public class Registrar extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        txtUsuario2 = new javax.swing.JTextField();
-        btnReporte = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,8 +40,7 @@ public class Registrar extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("CODIGO");
 
-        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtUsuario.setEnabled(false);
+        txtCodigo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("NOMBRE");
@@ -58,28 +48,28 @@ public class Registrar extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("EMAIL");
 
-        txtUsuario1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtUsuario1.setEnabled(false);
+        txtNombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        txtUsuario2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtUsuario2.setEnabled(false);
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        btnReporte.setBackground(new java.awt.Color(74, 150, 44));
-        btnReporte.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnReporte.setForeground(new java.awt.Color(255, 255, 255));
-        btnReporte.setText("Registrar");
-        btnReporte.setBorderPainted(false);
-        btnReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(74, 150, 44));
+        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorderPainted(false);
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
         btnSalir.setBackground(new java.awt.Color(211, 47, 47));
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         btnSalir.setText("Cerrar");
         btnSalir.setBorderPainted(false);
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -97,25 +87,25 @@ public class Registrar extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(34, 34, 34)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(502, 502, 502))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(34, 34, 34)
-                                .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel2)))
@@ -129,18 +119,18 @@ public class Registrar extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
@@ -150,9 +140,9 @@ public class Registrar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,61 +155,39 @@ public class Registrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        // Paso 8: Generar reporte
-    }//GEN-LAST:event_btnReporteActionPerformed
+          String coidgo = txtCodigo.getText().trim();//codigo
+          String nombre = txtNombre.getText().trim();
+          String email = txtEmail.getText().trim();
+           if (coidgo.isEmpty() || nombre.isEmpty() || email.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+                return;
+            }
+           else if(usuarioController.registerUsuario(coidgo, nombre, email)){
+                JOptionPane.showMessageDialog(this, "Registro exitoso.");
+                return;
+           }else{
+                JOptionPane.showMessageDialog(this, "El usuario "+coidgo+" ya existe.");
+                return;
+           }
+         
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+      dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Registrar().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReporte;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtUsuario1;
-    private javax.swing.JTextField txtUsuario2;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
