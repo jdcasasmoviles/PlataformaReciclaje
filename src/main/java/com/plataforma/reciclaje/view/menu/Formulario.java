@@ -2,11 +2,13 @@ package com.plataforma.reciclaje.view.menu;
 
 import com.plataforma.reciclaje.controller.PremioController;
 import com.plataforma.reciclaje.controller.RegistroReciclajeController;
+import com.plataforma.reciclaje.controller.ReporteController;
 import com.plataforma.reciclaje.controller.UsuarioController;
 import com.plataforma.reciclaje.model.MaterialType;
 import com.plataforma.reciclaje.model.RecyclingRecord;
 import com.plataforma.reciclaje.model.User;
 import com.plataforma.reciclaje.view.incentivos.Incentivos;
+import com.plataforma.reciclaje.view.reportes.GeneraReportes;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +21,7 @@ public class Formulario extends javax.swing.JFrame {
     RegistroReciclajeController registroReciclajeController=new RegistroReciclajeController();
     PremioController premioController = new PremioController();
     UsuarioController usuarioController = new UsuarioController();
+     ReporteController reporteController = new ReporteController();
     private User currentUser;
     public Formulario(User currentUser) {
         this.currentUser=currentUser;
@@ -414,6 +417,13 @@ public class Formulario extends javax.swing.JFrame {
             sb.append(String.format("%-20s : %8.2f cantidad\n", r.getMaterial(), r.getQuantity()));
         }      
         jtaReportes.setText(sb.toString());
+        GeneraReportes generaReportes = new GeneraReportes(
+               reporteController,
+             registroReciclajeController,
+             usuarioController,
+             sb,
+             currentUser);
+        generaReportes.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnVerResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerResultadosActionPerformed

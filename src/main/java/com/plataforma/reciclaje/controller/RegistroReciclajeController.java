@@ -41,7 +41,7 @@ public class RegistroReciclajeController {
         //recyclingService.save(new RecyclingRecord(idUsuario, material, cantidad, puntos));
     }
 
-    public Iterable<RecyclingRecord> findAllTotalReciclado() {
+    public List<RecyclingRecord> findAllTotalReciclado() {
   return recyclingService.findAllTotalReciclado();
     }
 }
